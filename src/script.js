@@ -90,6 +90,12 @@ window.addEventListener("mousemove", (e) => {
   //Attenzione al Y, y di default è + verso giu e - verso su. quindi dobbiamo invertirlo
   mouse.y = -(e.clientY / sizes.height) * 2 + 1;
 });
+
+window.addEventListener("click", () => {
+  if (currentIntersect) {
+    console.log("clicked inside");
+  }
+});
 /**********************************
  * Camera
  */
@@ -121,6 +127,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 const clock = new THREE.Clock();
 
+let currentIntersect = null; //CurrentIntersect variable to handle click event and mouse hover event
+
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
@@ -142,6 +150,18 @@ const tick = () => {
   //change color on instersecting object with raycast
   for (const objIntersect of intersects) {
     objIntersect.object.material.color.set(0xff00ee);
+  }
+
+  if (intersects.length) {
+    if (currentIntersect === null) {
+      console.log("enter");
+    }
+    currentIntersect = intersects[0];
+  } else {
+    if (currentIntersect) {
+      console.log("out");
+    }
+    currentIntersect = null;
   }
 
   // Update controls
