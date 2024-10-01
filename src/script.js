@@ -39,12 +39,20 @@ scene.add(object1, object2, object3);
 /**********************************
  * Raycaster
  */
+//creare un raycaster
 const raycaster = new THREE.Raycaster(); // init raycaster
 
 const rayOrigin = new THREE.Vector3(-3, 0, 0); // origine del ray
 const rayDirection = new THREE.Vector3(10, 0, 0); // direzione del ray che deve essere sempre normalizzato
 rayDirection.normalize(); //normalize method, converte il vettore in un unità del vettore, per capire puoi fare log prima e dopo di questo metodo
 raycaster.set(rayOrigin, rayDirection); //set origin and direction of ratcast
+
+//come cast un ray 2 opzione : "intersectObject(...)" , "intersectObjects(...)"
+const intersect = raycaster.intersectObject(object2);
+console.log(intersect);
+
+const intersects = raycaster.intersectObjects([object1, object2, object3]);
+console.log(intersects);
 
 /**********************************
  * Sizes
