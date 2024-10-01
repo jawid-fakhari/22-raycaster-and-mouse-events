@@ -92,9 +92,11 @@ window.addEventListener("mousemove", (e) => {
 });
 
 window.addEventListener("click", () => {
-  if (currentIntersect) {
-    console.log("clicked inside");
-  }
+  currentIntersect.object === object1
+    ? console.log("click obj 1")
+    : currentIntersect.object === object2
+    ? console.log("click obj 2")
+    : console.log("click obj 3");
 });
 /**********************************
  * Camera
